@@ -280,3 +280,225 @@ nav a:hover {
   text-decoration: underline;
 }
 
+/* ------------------------------------------------------ */
+/* CYBER CARD RESULT MODAL                                */
+/* ------------------------------------------------------ */
+
+.self-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 8, 20, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.45s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.self-modal-card {
+  width: 95%;
+  max-width: 650px;
+  margin-bottom: 40px;
+  background: #0b0f1f;
+  border-radius: 18px;
+  padding: 22px 26px;
+  color: var(--text-main);
+  border: 2px solid rgba(90, 200, 250, 0.6);
+  box-shadow: 0 0 25px rgba(90, 200, 250, 0.45), inset 0 0 20px rgba(90, 200, 250, 0.2);
+  animation: slideUp 0.45s cubic-bezier(.22,1,.36,1);
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.self-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(90, 200, 250, 0.8);
+  transition: 0.15s ease;
+}
+
+.self-modal-close:hover {
+  color: #fff;
+  transform: scale(1.15);
+}
+
+/* Neon cyber chip color accents */
+.self-chip {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+
+.self-chip-growth {
+  color: #5ac8fa;
+  border-color: #5ac8fa;
+  box-shadow: 0 0 12px rgba(90, 200, 250, 0.55);
+}
+
+.self-chip-threat {
+  color: #e74c3c;
+  border-color: #e74c3c;
+  box-shadow: 0 0 12px rgba(231, 76, 60, 0.55);
+}
+
+.self-chip-buffer {
+  color: #f1c40f;
+  border-color: #f1c40f;
+  box-shadow: 0 0 12px rgba(241, 196, 15, 0.55);
+}
+
+.self-chip-neutral {
+  color: #b0b6d1;
+  border-color: #b0b6d1;
+  box-shadow: 0 0 12px rgba(176, 182, 209, 0.45);
+}
+
+
+/* Self-schema questionnaire styles */
+.self-radio-group {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.86rem;
+}
+
+.self-radio-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.self-radio-option input[type="radio"] {
+  margin-top: 2px;
+  accent-color: var(--accent);
+}
+
+/* Results visuals */
+.self-personality-type {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  margin: 6px 0 2px;
+}
+
+.self-axis-grid {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.self-axis-row {
+  font-size: 0.9rem;
+}
+
+.self-axis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.self-axis-names {
+  font-weight: 600;
+}
+
+.self-axis-balance {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.self-axis-bar {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: #070b16;
+  overflow: hidden;
+  display: flex;
+}
+
+.self-axis-segment {
+  height: 100%;
+}
+
+.self-axis-left {
+  background: linear-gradient(90deg, #9b59b6, #5e60ce);
+}
+
+.self-axis-right {
+  background: linear-gradient(90deg, #5ac8fa, #2ecc71);
+}
+
+/* Comparison style chip */
+.self-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  margin-top: 4px;
+}
+
+.self-chip-growth {
+  background: rgba(46, 204, 113, 0.13);
+  border-color: rgba(46, 204, 113, 0.8);
+  color: #2ecc71;
+}
+
+.self-chip-threat {
+  background: rgba(231, 76, 60, 0.14);
+  border-color: rgba(231, 76, 60, 0.85);
+  color: #e74c3c;
+}
+
+.self-chip-buffer {
+  background: rgba(241, 196, 15, 0.12);
+  border-color: rgba(241, 196, 15, 0.85);
+  color: #f1c40f;
+}
+
+.self-chip-neutral {
+  background: rgba(90, 200, 250, 0.12);
+  border-color: rgba(90, 200, 250, 0.9);
+  color: #5ac8fa;
+}
+
+.self-results-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin-top: 4px;
+}
+
+
