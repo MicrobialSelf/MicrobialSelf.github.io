@@ -1,4 +1,9 @@
+
+
 import React, { useState } from "react";
+import lowImg from "../images/happy_bacteria.png";
+import moderateImg from "../images/okay_bacteria.png";
+import highImg from "../images/angry_bacteria.png";
 
 export default function MicrobiomeExplorer() {
   const [resultHtml, setResultHtml] = useState("");
@@ -7,39 +12,72 @@ export default function MicrobiomeExplorer() {
   //  WEIGHT CONFIG — diet weighted HIGHER, abx weighted lower
   // ======================================================
   const WEIGHTS = {
-    diet: 2.5,           // Strongest effect
-    abx: 1.0,            // Lower weight than before
-    birth: 1.5,
+    diet: 4,           // Strongest effect
+    abx: 3,            // Lower weight than before
+    birth: 2.3,
     env: 1.5,
     ferm: 2.0,
-    mig: 1.2,
+    mig: 1.5,
     exposure: 1.8,
     sleep: 1.2,
     stress: 1.4,
     activity: 1.3,
-    fiberConsistency: 2.0,
+    fiberConsistency: 1.5,
     processedFoods: 2.4,
-    sweeteners: 1.1,
-    smoking: 1.3,
-    alcohol: 1.1
+    sweeteners: 1.0,
+    smoking: 1.0,
+    alcohol: 1.0,
+  };
+
+  // Max possible numeric value from each <select>, based on your options
+  const MAX_VALUES = {
+    diet: 25,            // 0, 12, 25
+    abx: 18,             // 0, 10, 18
+    birth: 15,           // 0, 12, 6
+    env: 15,             // 0, 7, 15
+    ferm: 12,            // 0, 6, 12
+    mig: 10,              // 0, 5, 10
+    exposure: 12,        // 0, 6, 12
+    sleep: 10,           // 0, 5, 10
+    stress: 12,          // 0, 6, 12
+    activity: 10,        // 0, 5, 10
+    fiberConsistency: 18,// 0, 10, 18
+    processedFoods: 20,  // 0, 10, 20
+    sweeteners: 10,      // 0, 5, 10
+    smoking: 8,         // 0, 8, 14
+    alcohol: 8,         // 0, 6, 12
   };
 
   // ======================================================
-  //  LIFESTYLE SCORE CALCULATION WITH WEIGHTS APPLIED
+  //  LIFESTYLE SCORE CALCULATION WITH NORMALIZATION
   // ======================================================
   function computeWeightedScore(form) {
     let total = 0;
+    let maxTotal = 0;
+
     for (const key in WEIGHTS) {
-      const raw = parseInt(form[key] || 0, 10);
-      total += raw * WEIGHTS[key];
+      const weight = WEIGHTS[key];
+      const raw = parseFloat(form[key] ?? 0);
+
+      if (!isNaN(raw)) {
+        total += raw * weight;
+      }
+
+      const maxVal = MAX_VALUES[key] ?? 0;
+      maxTotal += maxVal * weight;
     }
-    return Math.min(100, Math.round(total));
+
+    if (maxTotal === 0) return 0;
+
+    // Normalize to 0–100 based on the maximum possible score
+    const normalized = (total / maxTotal) * 100;
+    return Math.max(0, Math.min(100, Math.round(normalized)));
   }
 
   function categorizeLifestyle(loss) {
-    if (loss <= 25)
+    if (loss <= 33)
       return { label: "Low microbial loss / high ecological resilience", chipClass: "chip-good" };
-    if (loss <= 55)
+    if (loss <= 66)
       return { label: "Moderate lifestyle-linked disruption", chipClass: "chip-mid" };
     return { label: "High disruption risk to gut ecosystem", chipClass: "chip-bad" };
   }
@@ -70,7 +108,8 @@ export default function MicrobiomeExplorer() {
       if (val > 1) val /= 100;
       if (val <= 0) continue;
 
-      const name = nameIndex !== -1 ? cols[nameIndex] || `Taxon ${i}` : `Taxon ${i}`;
+      const name =
+        nameIndex !== -1 ? cols[nameIndex] || `Taxon ${i}` : `Taxon ${i}`;
       entries.push({ name, value: val });
     }
 
@@ -89,6 +128,12 @@ export default function MicrobiomeExplorer() {
       .map((e) => ({ ...e, percent: e.p * 100 }));
 
     return { H, diversityScore, topTaxa };
+  }
+
+  function getLifestyleImage(score) {
+    if (score <= 25) return lowImg;
+    if (score <= 55) return moderateImg;
+    return highImg;
   }
 
   // ======================================================
@@ -110,6 +155,7 @@ export default function MicrobiomeExplorer() {
     const lifestyleScore = computeWeightedScore(form);
     const lifestyleCat = categorizeLifestyle(lifestyleScore);
     const diversityCat = categorizeDiversity(diversityScore);
+    const lifestyleImage = getLifestyleImage(lifestyleScore);
 
     // ------- TOP TAXA HTML -------
     let taxaHtml = "";
@@ -121,7 +167,9 @@ export default function MicrobiomeExplorer() {
         topTaxa
           .map(
             (t) =>
-              `<li><b>${t.name}</b>: ${t.percent.toFixed(1)}% of total community abundance</li>`
+              `<li><b>${t.name}</b>: ${t.percent.toFixed(
+                1
+              )}% of total community abundance</li>`
           )
           .join("") +
         "</ul>";
@@ -132,6 +180,12 @@ export default function MicrobiomeExplorer() {
 
     setResultHtml(`
       <h2>3. Results & Interpretation</h2>
+
+      <img 
+        src="${lifestyleImage}" 
+        alt="Lifestyle microbial loss image"
+        class="result-hero-img"
+      />
 
       <div class="score-section">
         <div class="score-row">
@@ -210,7 +264,6 @@ export default function MicrobiomeExplorer() {
         ? `Your top taxa profile provides additional ecological clues. Dominant taxa can indicate whether your gut environment favors fiber degraders, bile-tolerant strains, mucin specialists, or inflammation-associated microbes.`
         : "";
 
-
     return `${lifestyleText} ${diversityText} ${taxaText}`;
   }
 
@@ -230,19 +283,19 @@ export default function MicrobiomeExplorer() {
         {/* LEFT SIDE */}
         <div>
           <div className="card">
-            <h2>1. Upload gut microbiome CSV <small>(required)</small></h2>
-            <p>
-              Must contain <code>relative_abundance</code>. Optional <code>taxon_name</code>.
-            </p>
-
+            {/* Make sure the form wraps ALL lifestyle fields */}
             <form onSubmit={handleCalculate}>
+              <h2>1. Upload gut microbiome CSV <small>(required)</small></h2>
+              <p>
+                Must contain <code>relative_abundance</code>. Optional <code>taxon_name</code>.
+              </p>
+
               <label>Gut microbiome CSV file</label>
               <input type="file" name="csvInput" accept=".csv" required />
 
               <div className="card">
                 <h2>2. Lifestyle & Environment Assessment</h2>
 
-                {/* Existing fields (kept, but scores adjusted implicitly via weights) */}
                 <label>Diet pattern</label>
                 <select name="diet">
                   <option value="0">Traditional / high-fiber</option>
@@ -292,7 +345,6 @@ export default function MicrobiomeExplorer() {
                   <option value="12">Minimal</option>
                 </select>
 
-                {/* NEW QUESTIONS */}
                 <label>Sleep quality</label>
                 <select name="sleep">
                   <option value="0">Consistent & restorative</option>
@@ -357,10 +409,10 @@ export default function MicrobiomeExplorer() {
 
         {/* RIGHT SIDE RESULTS */}
         <div className="container">
-        <div
-          className="card card-full"
-          dangerouslySetInnerHTML={{ __html: resultHtml }}
-        ></div>
+          <div
+            className="card card-full"
+            dangerouslySetInnerHTML={{ __html: resultHtml }}
+          ></div>
         </div>
       </div>
     </div>

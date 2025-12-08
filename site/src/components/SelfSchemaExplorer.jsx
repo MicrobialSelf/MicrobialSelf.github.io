@@ -2,6 +2,69 @@
 import React, { useState } from "react";
 import "../styles.css";
 
+import { Radar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler
+} from "chart.js";
+
+ChartJS.register(
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler
+);
+
+function RadarChart({ axes }) {
+  const data = {
+    labels: [
+      "Looking-Glass",
+      "Interpretive Style",
+      "Identity Orientation",
+      "Embodiment"
+    ],
+    datasets: [
+      {
+        label: "Your Profile",
+        data: [
+          axes.LG === "HIGH" ? 90 : 30,
+          axes.IS === "CONS" ? 90 : 30,
+          axes.IO === "REL" ? 90 : 30,
+          axes.ES === "CONN" ? 90 : 30
+        ],
+        backgroundColor: "rgba(90,200,250,0.25)",
+        borderColor: "rgba(90,200,250,0.9)",
+        borderWidth: 2,
+        pointBackgroundColor: "#5ac8fa"
+      }
+    ]
+  };
+
+  const options = {
+    plugins: { legend: { display: false } },
+    scales: {
+      r: {
+        min: 0,
+        max: 100,
+        ticks: { display: false },
+        grid: { color: "#20283f" },
+        angleLines: { color: "#2c3550" },
+        pointLabels: { color: "#c7d2e8", font: { size: 12 } }
+      }
+    }
+  };
+
+  return (
+    <div style={{ maxWidth: "450px", margin: "0 auto 30px" }}>
+      <Radar data={data} options={options} />
+    </div>
+  );
+}
+
+
 export default function SelfSchemaExplorer() {
   // =========================================================
   // STATE
@@ -82,8 +145,327 @@ export default function SelfSchemaExplorer() {
     return best;
   }
 
+  // // =========================================================
+  // // FULL INTERPRETATIONS (LONG PARAGRAPHS)
+  // // =========================================================
+  // const axisDescriptions = {
+  //   // ------------------------------------------------------
+  //   // LOOKING-GLASS SENSITIVITY
+  //   // ------------------------------------------------------
+  //   LG_HIGH: {
+  //     title: "High Looking-Glass Sensitivity",
+  //     text: (
+  //       <>
+  //         <p>
+  //           Your responses indicate a heightened sensitivity to the “looking-glass self,” 
+  //           a concept from Charles Horton Cooley that describes how individuals imagine 
+  //           how they appear to others, interpret others’ judgments, and develop feelings 
+  //           about themselves based on those imagined appraisals. A high score suggests 
+  //           that your self-understanding is strongly relational and socially attuned.
+  //         </p>
+  //         <p>
+  //           This does not mean you are overly dependent on external validation; rather, 
+  //           it reflects an interpersonal orientation in which others’ evaluations and 
+  //           reactions hold meaningful informational value. You are more likely to 
+  //           incorporate social cues, emotional nuance, and perceived expectations into 
+  //           your ongoing sense of self. This aligns with symbolic interactionism: the 
+  //           self emerges through interaction, feedback, and shared meaning.
+  //         </p>
+  //         <p>
+  //           In the context of the microbial self, this orientation mirrors the idea that 
+  //           identity is co-constructed — not only psychologically, but biologically. 
+  //           Just as the microbiome is shaped by diet, environment, and contact, a 
+  //           high looking-glass orientation reflects a permeable, responsive sense of self 
+  //           that evolves through relationships. 
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+
+  //   LG_LOW: {
+  //     title: "Low Looking-Glass Sensitivity",
+  //     text: (
+  //       <>
+  //         <p>
+  //           Your responses indicate a lower sensitivity to Cooley’s looking-glass 
+  //           processes, suggesting that your sense of self is less dependent on how 
+  //           others might perceive you. You tend to form self-evaluations based on 
+  //           personal standards, internal goals, and intrinsic appraisals rather than 
+  //           imagined social judgments.
+  //         </p>
+  //         <p>
+  //           This does not imply detachment or social disinterest; rather, it signals a 
+  //           stable internal frame of reference. Symbolic interactionism argues that 
+  //           interactions shape the self, but individuals vary in how deeply external 
+  //           perspectives are internalized. You appear to filter social information, 
+  //           using some but not allowing it to dominate your sense of identity.
+  //         </p>
+  //         <p>
+  //           In relation to the microbial self, this orientation parallels a view of 
+  //           identity as anchored within the individual — coherent and continuous even 
+  //           amid environmental influence. You may appreciate biological and relational 
+  //           complexity, yet maintain firm boundaries around personal meaning-making.
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+
+  //   // ------------------------------------------------------
+  //   // INTERPRETIVE STYLE
+  //   // ------------------------------------------------------
+  //   IS_CONS: {
+  //     title: "Constructivist Interpretive Style",
+  //     text: (
+  //       <>
+  //         <p>
+  //           You show a constructivist orientation: the belief that identity, meaning, 
+  //           and even bodily boundaries are shaped through interpretation, context, 
+  //           and interaction. This aligns closely with philosophical perspectives in 
+  //           <i>Microbial Self</i> that frame the self as emergent, relational, and 
+  //           constantly reconstructed through biological and social processes.
+  //         </p>
+  //         <p>
+  //           Constructivists see categories like "healthy," "normal," or "self" as 
+  //           negotiated rather than fixed. Your answers suggest you are comfortable 
+  //           with ambiguity, differing viewpoints, and complexity. This often correlates 
+  //           with curiosity, openness, and an intuitive grasp of systems-level thinking.
+  //         </p>
+  //         <p>
+  //           In microbiome studies, this parallels the scientific understanding that 
+  //           host–microbe identities are dynamic — shaped by lifestyle, ecology, and 
+  //           interaction rather than static essence. You likely find fluidity more 
+  //           natural than rigidity when explaining human identity.
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+
+  //   IS_ESS: {
+  //     title: "Essentialist Interpretive Style",
+  //     text: (
+  //       <>
+  //         <p>
+  //           Your interpretive style leans toward essentialism — the belief that 
+  //           identity, traits, and categories reflect underlying, stable essences. 
+  //           Essentialism does not mean rigidity; it simply reflects a tendency to 
+  //           see underlying structure, biological grounding, or fundamental nature 
+  //           beneath observable variation.
+  //         </p>
+  //         <p>
+  //           Philosophically, this view contrasts with constructivism by emphasizing 
+  //           inherent properties rather than emergent meaning. Psychologically, it 
+  //           correlates with valuing clarity, stability, and well-defined categories.
+  //         </p>
+  //         <p>
+  //           In the context of the microbial self, an essentialist orientation may 
+  //           incline you to think of microbial signatures or biological markers as 
+  //           revealing stable truths about identity. You may prefer frameworks that 
+  //           identify causal mechanisms rather than fluid relational dynamics.
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+
+  //   // ------------------------------------------------------
+  //   // IDENTITY ORIENTATION
+  //   // ------------------------------------------------------
+  //   IO_REL: {
+  //     title: "Relational Identity Orientation",
+  //     text: (
+  //       <>
+  //         <p>
+  //           A relational identity orientation means that you understand yourself 
+  //           primarily through relationships, social roles, and interconnectedness. 
+  //           This aligns with symbolic interactionism and relational sociology, which 
+  //           view identity not as internal essence but as socially sustained.
+  //         </p>
+  //         <p>
+  //           You may prioritize connection, empathy, and context when interpreting 
+  //           self-experience. Narratives about who you are often involve others — 
+  //           friends, family, communities, or collaborative values.
+  //         </p>
+  //         <p>
+  //           This mirrors biological relationality: the microbiome itself is a 
+  //           community of relationships shaping the organism. A relational identity 
+  //           echoes this ecological view of self — as something formed through 
+  //           interaction and mutual influence.
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+
+  //   IO_IND: {
+  //     title: "Individualistic Identity Orientation",
+  //     text: (
+  //       <>
+  //         <p>
+  //           Your responses suggest you orient toward identity as internally anchored 
+  //           and personally constructed. You value autonomy, differentiation, and 
+  //           self-coherence — themes associated with classical humanist and 
+  //           individualist models of the self.
+  //         </p>
+  //         <p>
+  //           This orientation does not reject social influence; rather, it positions 
+  //           the individual as the primary author of identity narratives. You likely 
+  //           emphasize personal agency and internal motivation.
+  //         </p>
+  //         <p>
+  //           Relative to the microbial self, this may incline you to see the organism 
+  //           as the primary unit of identity, with microbes contributing but not 
+  //           fundamentally redefining selfhood.
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+
+  //   // ------------------------------------------------------
+  //   // EMBODIED SELF CONTINUITY
+  //   // ------------------------------------------------------
+  //   ES_CONN: {
+  //     title: "Embodied Continuity: Connected",
+  //     text: (
+  //       <>
+  //         <p>
+  //           You experience your body and identity as continuous with biological, 
+  //           ecological, and environmental processes. This view resonates strongly with 
+  //           the “holobiont” and “extended phenotype” concepts in microbiome science. 
+  //           You may intuitively grasp that the boundary between self and non-self is 
+  //           porous and dynamically maintained.
+  //         </p>
+  //         <p>
+  //           Philosophically, this reflects an embodied, phenomenological orientation: 
+  //           the self is lived, experienced, and materially embedded. Your responses 
+  //           indicate comfort with interdependence and the idea that biological systems 
+  //           (such as your microbiome) meaningfully participate in who you are.
+  //         </p>
+  //         <p>
+  //           This perspective aligns with contemporary microbiome research, which 
+  //           emphasizes the co-regulation between host and microbes across immunity, 
+  //           metabolism, behavior, and development.
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+
+  //   ES_SEP: {
+  //     title: "Embodied Continuity: Separate",
+  //     text: (
+  //       <>
+  //         <p>
+  //           You maintain a strong conceptual boundary between yourself and external 
+  //           biological systems. This reflects a classical biomedical model: the self 
+  //           as a discrete organism, with microbes functioning as influences rather 
+  //           than components of identity.
+  //         </p>
+  //         <p>
+  //           This orientation emphasizes cognitive coherence, psychological autonomy, 
+  //           and bodily integrity. You likely prefer explanations that separate 
+  //           environmental influence from personal selfhood rather than blending them.
+  //         </p>
+  //         <p>
+  //           In relation to microbiome studies, this does not signal resistance to 
+  //           science — but rather a conceptual preference for clear organism–environment 
+  //           boundaries. You may appreciate microbiome complexity while still seeing 
+  //           identity as primarily human and internally governed.
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+  // };
+
+  // // ------------------------------------------------------
+  // // SOCIAL COMPARISON INTERPRETATIONS
+  // // ------------------------------------------------------
+  // const comparisonDescriptions = {
+  //   UP_GROWTH: {
+  //     title: "Upward Growth-Oriented Comparison",
+  //     text: (
+  //       <>
+  //         <p>
+  //           When you encounter someone doing better, you tend to interpret it as 
+  //           inspiration or an opportunity for learning. This is known as “upward 
+  //           identification,” a style associated with positive affect, increased 
+  //           motivation, and adaptive self-regulation.
+  //         </p>
+  //         <p>
+  //           Psychological research by Taylor, Wills, and Wood finds that people with 
+  //           this orientation often maintain strong self-efficacy and use comparison 
+  //           information constructively. This style harmonizes with a relational 
+  //           interpretation of the self — one in which others serve as sources of 
+  //           meaning and growth rather than threat.
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+
+  //   UP_THREAT: {
+  //     title: "Upward Threat-Sensitive Comparison",
+  //     text: (
+  //       <>
+  //         <p>
+  //           You tend to experience upward comparisons — seeing someone outperform you 
+  //           or excel in valued domains — as potentially discouraging or self-critical. 
+  //           This pattern, known as “upward contrast,” can evoke feelings of inadequacy 
+  //           or pressure.
+  //         </p>
+
+  //         <p>
+  //           Research in social comparison theory shows that this does not reflect 
+  //           weakness, but sensitivity to self-relevance. You are more likely to feel 
+  //           impacted by comparisons when a domain is important to your identity, 
+  //           suggesting you care deeply about mastery and meaningful growth.
+  //         </p>
+
+  //         <p>
+  //           This style can produce both challenge and strain; however, it often 
+  //           co-occurs with conscientiousness and high personal standards. Recognizing 
+  //           this tendency allows intentional reframing of upward comparisons into 
+  //           opportunities rather than threats.
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+
+  //   DOWN_BUFFER: {
+  //     title: "Downward Buffering",
+  //     text: (
+  //       <>
+  //         <p>
+  //           You use downward comparisons — reflecting on others doing worse — as a way 
+  //           to protect self-worth. This is a common and psychologically adaptive 
+  //           strategy, especially in moments of stress or self-doubt.
+  //         </p>
+  //         <p>
+  //           Social psychologists Taylor and Wills identify this style as a form of 
+  //           emotional regulation: it provides stability, reassurance, and mood 
+  //           recovery. This pattern is neither selfish nor cynical; it is a normal way 
+  //           of grounding oneself when self-evaluation feels fragile.
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+
+  //   NEUTRAL: {
+  //     title: "Neutral Comparison Style",
+  //     text: (
+  //       <>
+  //         <p>
+  //           You treat social comparisons as informational rather than emotional events. 
+  //           This style reflects psychological independence, low reactivity, and steady 
+  //           self-concept clarity.
+  //         </p>
+  //         <p>
+  //           You may notice differences, but you rarely interpret them as personal 
+  //           threats or sources of validation. This style promotes cognitive stability 
+  //           and measured self-assessment.
+  //         </p>
+  //       </>
+  //     ),
+  //   },
+  // };
+
   // =========================================================
-  // FULL INTERPRETATIONS (LONG PARAGRAPHS)
+  // FULL INTERPRETATIONS (SHORT, CLEAN, STRAIGHTFORWARD)
   // =========================================================
   const axisDescriptions = {
     // ------------------------------------------------------
@@ -94,26 +476,13 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            Your responses indicate a heightened sensitivity to the “looking-glass self,” 
-            a concept from Charles Horton Cooley that describes how individuals imagine 
-            how they appear to others, interpret others’ judgments, and develop feelings 
-            about themselves based on those imagined appraisals. A high score suggests 
-            that your self-understanding is strongly relational and socially attuned.
+            You’re highly aware of how others see you, and social cues play a meaningful role in how you understand yourself.
           </p>
           <p>
-            This does not mean you are overly dependent on external validation; rather, 
-            it reflects an interpersonal orientation in which others’ evaluations and 
-            reactions hold meaningful informational value. You are more likely to 
-            incorporate social cues, emotional nuance, and perceived expectations into 
-            your ongoing sense of self. This aligns with symbolic interactionism: the 
-            self emerges through interaction, feedback, and shared meaning.
+            This doesn’t mean you rely on approval; you simply notice and use feedback naturally.
           </p>
           <p>
-            In the context of the microbial self, this orientation mirrors the idea that 
-            identity is co-constructed — not only psychologically, but biologically. 
-            Just as the microbiome is shaped by diet, environment, and contact, a 
-            high looking-glass orientation reflects a permeable, responsive sense of self 
-            that evolves through relationships. 
+            In microbial-self terms, this reflects a flexible identity shaped through interaction.
           </p>
         </>
       ),
@@ -124,24 +493,13 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            Your responses indicate a lower sensitivity to Cooley’s looking-glass 
-            processes, suggesting that your sense of self is less dependent on how 
-            others might perceive you. You tend to form self-evaluations based on 
-            personal standards, internal goals, and intrinsic appraisals rather than 
-            imagined social judgments.
+            You rely mainly on your own standards when forming your self-view. Others’ opinions matter, but they don’t define you.
           </p>
           <p>
-            This does not imply detachment or social disinterest; rather, it signals a 
-            stable internal frame of reference. Symbolic interactionism argues that 
-            interactions shape the self, but individuals vary in how deeply external 
-            perspectives are internalized. You appear to filter social information, 
-            using some but not allowing it to dominate your sense of identity.
+            You filter social information and use what feels relevant without overinternalizing it.
           </p>
           <p>
-            In relation to the microbial self, this orientation parallels a view of 
-            identity as anchored within the individual — coherent and continuous even 
-            amid environmental influence. You may appreciate biological and relational 
-            complexity, yet maintain firm boundaries around personal meaning-making.
+            This aligns with an internally anchored identity with clearer boundaries.
           </p>
         </>
       ),
@@ -155,23 +513,13 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            You show a constructivist orientation: the belief that identity, meaning, 
-            and even bodily boundaries are shaped through interpretation, context, 
-            and interaction. This aligns closely with philosophical perspectives in 
-            <i>Microbial Self</i> that frame the self as emergent, relational, and 
-            constantly reconstructed through biological and social processes.
+            You see identity and meaning as shaped by context and relationships rather than fixed categories.
           </p>
           <p>
-            Constructivists see categories like "healthy," "normal," or "self" as 
-            negotiated rather than fixed. Your answers suggest you are comfortable 
-            with ambiguity, differing viewpoints, and complexity. This often correlates 
-            with curiosity, openness, and an intuitive grasp of systems-level thinking.
+            You’re comfortable with complexity and multiple viewpoints.
           </p>
           <p>
-            In microbiome studies, this parallels the scientific understanding that 
-            host–microbe identities are dynamic — shaped by lifestyle, ecology, and 
-            interaction rather than static essence. You likely find fluidity more 
-            natural than rigidity when explaining human identity.
+            This matches the idea that the self, like the microbiome, is dynamic and shaped by interaction.
           </p>
         </>
       ),
@@ -182,22 +530,13 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            Your interpretive style leans toward essentialism — the belief that 
-            identity, traits, and categories reflect underlying, stable essences. 
-            Essentialism does not mean rigidity; it simply reflects a tendency to 
-            see underlying structure, biological grounding, or fundamental nature 
-            beneath observable variation.
+            You tend to view identity and traits as having stable underlying qualities.
           </p>
           <p>
-            Philosophically, this view contrasts with constructivism by emphasizing 
-            inherent properties rather than emergent meaning. Psychologically, it 
-            correlates with valuing clarity, stability, and well-defined categories.
+            You value clarity, structure, and well-defined categories.
           </p>
           <p>
-            In the context of the microbial self, an essentialist orientation may 
-            incline you to think of microbial signatures or biological markers as 
-            revealing stable truths about identity. You may prefer frameworks that 
-            identify causal mechanisms rather than fluid relational dynamics.
+            In microbial-self terms, you see biological patterns as meaningful anchors rather than fluid constructs.
           </p>
         </>
       ),
@@ -211,21 +550,13 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            A relational identity orientation means that you understand yourself 
-            primarily through relationships, social roles, and interconnectedness. 
-            This aligns with symbolic interactionism and relational sociology, which 
-            view identity not as internal essence but as socially sustained.
+            You understand yourself through relationships, roles, and connection with others.
           </p>
           <p>
-            You may prioritize connection, empathy, and context when interpreting 
-            self-experience. Narratives about who you are often involve others — 
-            friends, family, communities, or collaborative values.
+            You tend to interpret experiences through a social or interpersonal lens.
           </p>
           <p>
-            This mirrors biological relationality: the microbiome itself is a 
-            community of relationships shaping the organism. A relational identity 
-            echoes this ecological view of self — as something formed through 
-            interaction and mutual influence.
+            This mirrors the microbiome’s relational nature, identity emerging through interaction.
           </p>
         </>
       ),
@@ -236,20 +567,13 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            Your responses suggest you orient toward identity as internally anchored 
-            and personally constructed. You value autonomy, differentiation, and 
-            self-coherence — themes associated with classical humanist and 
-            individualist models of the self.
+            You see identity as anchored within the individual, shaped mainly by personal choices, values, and motivations.
           </p>
           <p>
-            This orientation does not reject social influence; rather, it positions 
-            the individual as the primary author of identity narratives. You likely 
-            emphasize personal agency and internal motivation.
+            You prioritize autonomy and internal direction when defining who you are.
           </p>
           <p>
-            Relative to the microbial self, this may incline you to see the organism 
-            as the primary unit of identity, with microbes contributing but not 
-            fundamentally redefining selfhood.
+            In microbial-self terms, you tend to view the individual as the core of identity.
           </p>
         </>
       ),
@@ -263,22 +587,13 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            You experience your body and identity as continuous with biological, 
-            ecological, and environmental processes. This view resonates strongly with 
-            the “holobiont” and “extended phenotype” concepts in microbiome science. 
-            You may intuitively grasp that the boundary between self and non-self is 
-            porous and dynamically maintained.
+            You experience your identity as closely linked with your body, biology, and environment.
           </p>
           <p>
-            Philosophically, this reflects an embodied, phenomenological orientation: 
-            the self is lived, experienced, and materially embedded. Your responses 
-            indicate comfort with interdependence and the idea that biological systems 
-            (such as your microbiome) meaningfully participate in who you are.
+            You naturally think in terms of interdependence and connection.
           </p>
           <p>
-            This perspective aligns with contemporary microbiome research, which 
-            emphasizes the co-regulation between host and microbes across immunity, 
-            metabolism, behavior, and development.
+            This fits with microbiome science, where the self is part of a larger ecological system.
           </p>
         </>
       ),
@@ -289,21 +604,13 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            You maintain a strong conceptual boundary between yourself and external 
-            biological systems. This reflects a classical biomedical model: the self 
-            as a discrete organism, with microbes functioning as influences rather 
-            than components of identity.
+            You see yourself as distinct from external biological systems, with clear boundaries between self and environment.
           </p>
           <p>
-            This orientation emphasizes cognitive coherence, psychological autonomy, 
-            and bodily integrity. You likely prefer explanations that separate 
-            environmental influence from personal selfhood rather than blending them.
+            You prefer explanations that emphasize the individual rather than blended or interdependent models.
           </p>
           <p>
-            In relation to microbiome studies, this does not signal resistance to 
-            science — but rather a conceptual preference for clear organism–environment 
-            boundaries. You may appreciate microbiome complexity while still seeing 
-            identity as primarily human and internally governed.
+            This reflects a classical view of the self as a discrete organism influenced, but not defined, by outside systems.
           </p>
         </>
       ),
@@ -319,17 +626,10 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            When you encounter someone doing better, you tend to interpret it as 
-            inspiration or an opportunity for learning. This is known as “upward 
-            identification,” a style associated with positive affect, increased 
-            motivation, and adaptive self-regulation.
+            When you see someone doing better, you tend to feel motivated or inspired rather than discouraged.
           </p>
           <p>
-            Psychological research by Taylor, Wills, and Wood finds that people with 
-            this orientation often maintain strong self-efficacy and use comparison 
-            information constructively. This style harmonizes with a relational 
-            interpretation of the self — one in which others serve as sources of 
-            meaning and growth rather than threat.
+            You use comparisons constructively and treat them as opportunities for learning.
           </p>
         </>
       ),
@@ -340,24 +640,10 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            You tend to experience upward comparisons — seeing someone outperform you 
-            or excel in valued domains — as potentially discouraging or self-critical. 
-            This pattern, known as “upward contrast,” can evoke feelings of inadequacy 
-            or pressure.
+            Upward comparisons can feel discouraging or self-critical, especially in areas that matter to you.
           </p>
-
           <p>
-            Research in social comparison theory shows that this does not reflect 
-            weakness, but sensitivity to self-relevance. You are more likely to feel 
-            impacted by comparisons when a domain is important to your identity, 
-            suggesting you care deeply about mastery and meaningful growth.
-          </p>
-
-          <p>
-            This style can produce both challenge and strain; however, it often 
-            co-occurs with conscientiousness and high personal standards. Recognizing 
-            this tendency allows intentional reframing of upward comparisons into 
-            opportunities rather than threats.
+            This reflects high personal standards and deep investment in meaningful goals.
           </p>
         </>
       ),
@@ -368,15 +654,7 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            You use downward comparisons — reflecting on others doing worse — as a way 
-            to protect self-worth. This is a common and psychologically adaptive 
-            strategy, especially in moments of stress or self-doubt.
-          </p>
-          <p>
-            Social psychologists Taylor and Wills identify this style as a form of 
-            emotional regulation: it provides stability, reassurance, and mood 
-            recovery. This pattern is neither selfish nor cynical; it is a normal way 
-            of grounding oneself when self-evaluation feels fragile.
+            You sometimes compare downward to steady yourself or regain confidence. This is a common and effective emotional regulation strategy.
           </p>
         </>
       ),
@@ -387,19 +665,16 @@ export default function SelfSchemaExplorer() {
       text: (
         <>
           <p>
-            You treat social comparisons as informational rather than emotional events. 
-            This style reflects psychological independence, low reactivity, and steady 
-            self-concept clarity.
+            You view social comparisons mainly as information rather than emotional events.
           </p>
           <p>
-            You may notice differences, but you rarely interpret them as personal 
-            threats or sources of validation. This style promotes cognitive stability 
-            and measured self-assessment.
+            You stay steady regardless of how others are doing.
           </p>
         </>
       ),
     },
   };
+
 
   // =========================================================
   // RUN QUIZ
@@ -612,6 +887,14 @@ export default function SelfSchemaExplorer() {
           <div className="container">
           <div className="card card-full">
             <h2>Your self-schema profile</h2>
+            <RadarChart axes={result.axes} />
+            <p className="subtitle" style={{ textAlign: "center", marginTop: "-10px" }}>
+              This radar chart summarizes your self-schema across four dimensions:
+              looking-glass sensitivity, interpretive style, identity orientation, 
+              and embodied self-continuity. Higher values reflect the dominant pattern 
+              your answers lean toward.
+            </p>
+
 
             {/* AXIS SECTIONS */}
             <AxisSection

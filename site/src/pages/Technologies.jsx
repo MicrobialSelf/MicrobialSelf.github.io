@@ -338,7 +338,7 @@ export default function Technologies() {
 
             <p className="tech-explainer">
               Behind every neat CSV lies enormous complexity. This tool simplifies these
-              layers for learning — not for diagnosis.
+              layers for learning - not for diagnosis.
             </p>
           </div>
         </div>
