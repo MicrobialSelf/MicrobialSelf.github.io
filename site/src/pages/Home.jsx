@@ -6,7 +6,7 @@ export default function Home() {
     <div>
 
       <div className="card">
-        <h2>Microbial Self – Exploring Identity Across Scales</h2>
+        <h2>Microbial Self – Discover Your Biological & Psychological Identity</h2>
         <p className="subtitle">
           This website is a final project for the <b>Microbial Self</b> course. It turns core ideas
           from the class into an interactive prototype, inviting you to explore how your
