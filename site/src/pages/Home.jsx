@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <div>
 
+    
       <div className="card">
         <h2>Microbial Self – Discover Your Biological & Psychological Identity</h2>
         <p className="subtitle">

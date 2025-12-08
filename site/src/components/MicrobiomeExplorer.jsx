@@ -356,10 +356,12 @@ export default function MicrobiomeExplorer() {
         </div>
 
         {/* RIGHT SIDE RESULTS */}
+        <div className="container">
         <div
           className="card card-full"
           dangerouslySetInnerHTML={{ __html: resultHtml }}
         ></div>
+        </div>
       </div>
     </div>
   );

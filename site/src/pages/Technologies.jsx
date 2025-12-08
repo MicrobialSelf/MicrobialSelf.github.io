@@ -80,39 +80,21 @@ export default function Technologies() {
 
                 <div className="pipeline-row">
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">1</div>
-                    <div className="pipeline-text">
-                      Sample collection
-                      <span>Stool, swab, biopsy</span>
-                    </div>
+                    <div className="pipeline-dot">1) Sample collection: Stool, swab, biopsy</div>
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">2</div>
-                    <div className="pipeline-text">
-                      DNA extraction
-                      <span>Host & microbial DNA</span>
-                    </div>
+                    <div className="pipeline-dot">2) DNA extraction: Host & microbial DNA</div>
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">3</div>
-                    <div className="pipeline-text">
-                      PCR of 16S region
-                      <span>e.g., V3–V4</span>
-                    </div>
+                    <div className="pipeline-dot">3) PCR of 16S region e.g., V3–V4</div>
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">4</div>
-                    <div className="pipeline-text">
-                      Sequencing
-                      <span>MiSeq / similar</span>
-                    </div>
+                    <div className="pipeline-dot">4) Sequencing MiSeq / similar</div>
+
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">5</div>
-                    <div className="pipeline-text">
-                      Bioinformatics
-                      <span>ASVs → taxonomy</span>
-                    </div>
+                    <div className="pipeline-dot">5) Bioinformatics ASVs → taxonomy</div>
+
                   </div>
                 </div>
 

@@ -78,6 +78,7 @@ p {
   box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
 }
 
+
 .card + .card {
   margin-top: 4px;
 }
@@ -503,4 +504,33 @@ nav a:hover {
 
 
 
+
+/* FORCE PAGE TO CENTER AND EXPAND */
+html, body {
+  width: 100% !important;
+  max-width: 1400px !important;   /* Make page wide */
+  margin: 0 auto !important;      /* Center page */
+  padding: 0 20px !important;
+}
+
+body {
+  margin-top: 32px !important;
+}
+
+/* CENTER THE GRID */
+.container {
+  width: 100% !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  display: grid;
+  justify-content: center;     /* Center content horizontally */
+}
+
+/* MAKE CARDS CENTER AND WIDE */
+.card, .card-full {
+  width: 100% !important;
+  max-width: 1000px !important;  /* Adjust how wide you want the cards */
+  margin-left: auto !important;  /* Center card */
+  margin-right: auto !important;
+}
 
