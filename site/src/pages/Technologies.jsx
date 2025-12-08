@@ -62,13 +62,14 @@ export default function Technologies() {
                 Metabolomics
               </button>
             </div>
+            <br />
 
             {/* 16S VIEW */}
             {selected === "16S" && (
               <div className="tech-detail">
                 <div className="tech-tags">
-                  <span className="tech-chip tech-chip-tax">Who is there?</span>
-                  <span className="tech-chip tech-chip-cost">Lower cost</span>
+                  <span className="tech-chip tech-chip-tax">Who is there? </span>
+                  <span className="tech-chip tech-chip-cost">Lower cost/</span>
                   <span className="tech-chip tech-chip-depth">Coarse resolution</span>
                 </div>
 
@@ -99,6 +100,7 @@ export default function Technologies() {
                 </div>
 
                 <p className="tech-explainer">
+                  <br />
                   The final output is a <b>feature table</b> (samples × taxa). Our tool uses a
                   simplified version: one list of <code>relative_abundance</code> values.
                 </p>
@@ -128,8 +130,8 @@ export default function Technologies() {
             {selected === "SHOTGUN" && (
               <div className="tech-detail">
                 <div className="tech-tags">
-                  <span className="tech-chip tech-chip-tax">Who is there?</span>
-                  <span className="tech-chip tech-chip-func">What can they do?</span>
+                  <span className="tech-chip tech-chip-tax">Who is there? </span>
+                  <span className="tech-chip tech-chip-func">What can they do? </span>
                   <span className="tech-chip tech-chip-depth">Higher depth</span>
                 </div>
 
@@ -141,43 +143,24 @@ export default function Technologies() {
 
                 <div className="pipeline-row">
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">1</div>
-                    <div className="pipeline-text">
-                      Sample collection
-                      <span>Usually stool</span>
-                    </div>
+                    <div className="pipeline-dot">1) Sample collection: Usually stool</div>
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">2</div>
-                    <div className="pipeline-text">
-                      DNA extraction
-                      <span>Microbial & host DNA</span>
-                    </div>
+                    <div className="pipeline-dot">2) DNA extraction: Microbial & host DNA</div>
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">3</div>
-                    <div className="pipeline-text">
-                      Library prep
-                      <span>Fragmentation & barcodes</span>
-                    </div>
+                    <div className="pipeline-dot">3) Library prep: Fragmentation & barcodes</div>
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">4</div>
-                    <div className="pipeline-text">
-                      Sequencing
-                      <span>HiSeq / NovaSeq</span>
-                    </div>
+                    <div className="pipeline-dot">4) Sequencing: HiSeq / NovaSeq</div>
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">5</div>
-                    <div className="pipeline-text">
-                      Assembly & mapping
-                      <span>Genomes & gene families</span>
-                    </div>
+                    <div className="pipeline-dot">5) Assembly & mapping: Genomes & gene families</div>
                   </div>
                 </div>
 
                 <p className="tech-explainer">
+                  <br />
                   Shotgun data provide both <b>taxonomic</b> and <b>functional</b> profiles.
                   Our project only uses collapsed taxa abundances, but real studies explore genes,
                   pathways, and metabolic potential.
@@ -208,7 +191,7 @@ export default function Technologies() {
             {selected === "METABO" && (
               <div className="tech-detail">
                 <div className="tech-tags">
-                  <span className="tech-chip tech-chip-func">What are they producing?</span>
+                  <span className="tech-chip tech-chip-func">What are they producing? </span>
                   <span className="tech-chip tech-chip-host">Host interface</span>
                 </div>
 
@@ -219,43 +202,24 @@ export default function Technologies() {
 
                 <div className="pipeline-row">
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">1</div>
-                    <div className="pipeline-text">
-                      Sample collection
-                      <span>Serum, stool, urine</span>
-                    </div>
+                    <div className="pipeline-dot">1) Sample collection: Serum, stool, urine</div>
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">2</div>
-                    <div className="pipeline-text">
-                      Extraction
-                      <span>Separate metabolites</span>
-                    </div>
+                    <div className="pipeline-dot">2) Extraction: Separate metabolites</div>
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">3</div>
-                    <div className="pipeline-text">
-                      MS / NMR
-                      <span>Peaks & spectra</span>
-                    </div>
+                    <div className="pipeline-dot">3) MS / NMR: Peaks & spectra</div>
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">4</div>
-                    <div className="pipeline-text">
-                      Peak ID
-                      <span>Match to libraries</span>
-                    </div>
+                    <div className="pipeline-dot">4) Peak ID: Match to libraries</div>
                   </div>
                   <div className="pipeline-step">
-                    <div className="pipeline-dot">5</div>
-                    <div className="pipeline-text">
-                      Modeling
-                      <span>Diet, disease, microbiome links</span>
-                    </div>
+                    <div className="pipeline-dot">5) Modeling: Diet, disease, microbiome links</div>
                   </div>
                 </div>
 
                 <p className="tech-explainer">
+                  <br />
                   Metabolomics answers <b>what is happening right now</b> at the
                   host–microbe interface, including SCFAs, bile acids, and tryptophan metabolites.
                 </p>
