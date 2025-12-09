@@ -152,8 +152,8 @@ return { H, diversityScore, topTaxa };
 }
 
   function getLifestyleImage(score) {
-    if (score <= 25) return lowImg;
-    if (score <= 55) return moderateImg;
+    if (score <= 33) return lowImg;
+    if (score <= 66) return moderateImg;
     return highImg;
   }
 
@@ -257,10 +257,10 @@ return { H, diversityScore, topTaxa };
     let diversityText = "";
 
     // ---- Lifestyle narrative ----
-    if (lifestyleScore <= 25) {
+    if (lifestyleScore <= 33) {
       lifestyleText =
         "Your lifestyle selections suggest a gut environment that supports microbial resilience. Factors such as fiber-rich meals, regular outdoor exposure, lower processed food intake, and consistent fermented food consumption support ecological stability within the gut. These patterns mirror characteristics often seen in traditional or mixed-diet populations with higher biodiversity.";
-    } else if (lifestyleScore <= 55) {
+    } else if (lifestyleScore <= 66) {
       lifestyleText =
         "Your responses indicate a moderate risk of microbiome disruption. While several habits support microbial balance, others — such as inconsistent fiber intake, moderate stress, reduced nature exposure, or occasional processed foods — may pull the ecosystem toward lower diversity. This reflects a transitional lifestyle pattern common in semi-industrialized or urbanizing environments.";
     } else {
