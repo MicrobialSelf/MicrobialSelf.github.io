@@ -54,27 +54,26 @@ export default function Home() {
 
         <h3>2. Self-schema & personality module</h3>
         <p>
-          In the <b>self-schema tab</b>, you answer questions about how you act and feel in social
-          situations, how you make decisions, and how you like to organize your life. The tool:
+          The <b>self-schema tab</b> asks brief questions about how you interpret experiences, relate to others, and understand your own identity. Instead of a personality “type,” the tool plots you across four psychological dimensions:
         </p>
         <ul>
           <li>
-            Summarizes your answers using a four-letter code (E/I, S/N, T/F, J/P).
+            Looking-glass sensitivity
           </li>
           <li>
-            Provides short explanations for each axis, inspired by self-schema and personality
-            research.
+            Interpretive style (constructivist ↔ essentialist)
           </li>
           <li>
-            Frames this as a <b>reflective snapshot</b> rather than a clinical test, connecting
-            it to ideas about the <b>narrative self</b> and <b>relational self</b>.
+              Identity orientation (relational ↔ individualistic)
+          </li>
+          <li>
+              Social comparison patterns
           </li>
         </ul>
 
         <p>
-          Seeing these modules side by side is meant to highlight how the “self” is not just a
-          mental story or just a microbial profile, but a <b>layered system</b> that spans biology,
-          psychology, and environment.
+            Your results appear as a radar chart with short explanations for each axis.
+            This module is designed as a reflective snapshot, helping you explore how your psychological sense of self connects to broader ideas about embodiment, relationality, and the microbial self.
         </p>
       </div>
 
