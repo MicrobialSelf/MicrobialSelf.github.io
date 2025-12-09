@@ -143,13 +143,13 @@ const topTaxa = normalized
 return { H, diversityScore, topTaxa };
 
 
-    const topTaxa = normalized
-      .sort((a, b) => b.p - a.p)
-      .slice(0, 5)
-      .map((e) => ({ ...e, percent: e.p * 100 }));
+  //   const topTaxa = normalized
+  //     .sort((a, b) => b.p - a.p)
+  //     .slice(0, 5)
+  //     .map((e) => ({ ...e, percent: e.p * 100 }));
 
-    return { H, diversityScore, topTaxa };
-  }
+  //   return { H, diversityScore, topTaxa };
+}
 
   function getLifestyleImage(score) {
     if (score <= 25) return lowImg;
