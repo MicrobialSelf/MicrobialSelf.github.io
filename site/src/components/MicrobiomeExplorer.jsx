@@ -117,10 +117,31 @@ export default function MicrobiomeExplorer() {
     const normalized = entries.map((e) => ({ name: e.name, p: e.value / total }));
 
     // Shannon H
-    let H = 0;
-    normalized.forEach((e) => (H -= e.p * Math.log(e.p)));
+// Shannon H
+let H = 0;
+normalized.forEach((e) => {
+  H -= e.p * Math.log(e.p);
+});
 
-    const diversityScore = Math.min(100, Math.max(0, (H / 4) * 100));
+// Number of taxa with non-zero abundance
+const k = normalized.length;
+
+// Theoretical max Shannon for k equally abundant taxa: Hmax = ln(k)
+const Hmax = k > 0 ? Math.log(k) : 1;
+
+// Normalize H to 0–100 based on Hmax
+const diversityScore = Math.min(
+  100,
+  Math.max(0, (H / Hmax) * 100)
+);
+
+const topTaxa = normalized
+  .sort((a, b) => b.p - a.p)
+  .slice(0, 5)
+  .map((e) => ({ ...e, percent: e.p * 100 }));
+
+return { H, diversityScore, topTaxa };
+
 
     const topTaxa = normalized
       .sort((a, b) => b.p - a.p)
