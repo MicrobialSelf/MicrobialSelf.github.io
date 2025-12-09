@@ -12,15 +12,15 @@ export default function MicrobiomeExplorer() {
   //  WEIGHT CONFIG — diet weighted HIGHER, abx weighted lower
   // ======================================================
   const WEIGHTS = {
-    diet: 4,           // Strongest effect
-    abx: 3,            // Lower weight than before
-    birth: 2.3,
-    env: 1.5,
-    ferm: 2.0,
-    mig: 1.5,
+    diet: 4.0,           // Strongest effect
+    abx: 3.0,            // Lower weight than before
+    birth: 2.5,
+    env: 2.5,
+    ferm: 1.5,
+    mig: 1.8,
     exposure: 1.8,
     sleep: 1.2,
-    stress: 1.4,
+    stress: 1.2,
     activity: 1.3,
     fiberConsistency: 1.5,
     processedFoods: 2.4,
@@ -32,10 +32,10 @@ export default function MicrobiomeExplorer() {
   // Max possible numeric value from each <select>, based on your options
   const MAX_VALUES = {
     diet: 25,            // 0, 12, 25
-    abx: 18,             // 0, 10, 18
-    birth: 15,           // 0, 12, 6
+    abx: 20,             // 0, 10, 18
+    birth: 13,           // 0, 12, 6
     env: 15,             // 0, 7, 15
-    ferm: 12,            // 0, 6, 12
+    ferm: 10,            // 0, 6, 12
     mig: 10,              // 0, 5, 10
     exposure: 12,        // 0, 6, 12
     sleep: 10,           // 0, 5, 10

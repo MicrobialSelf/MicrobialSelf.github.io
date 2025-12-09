@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles.css";
 
+
 export default function Technologies() {
   const [selected, setSelected] = useState("16S");
 
@@ -13,6 +14,7 @@ export default function Technologies() {
         From stool to CSV — explore the sequencing and bioinformatics pipelines behind
         the microbiome data used in this project.
       </p>
+
 
       {/* MAIN */}
       <div className="container">
