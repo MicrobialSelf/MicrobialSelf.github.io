@@ -9,6 +9,9 @@ Rather than treating identity as fixed or purely human-centered, this project fr
 This tool is designed for **reflection and learning**, not diagnosis or clinical interpretation.
 
 ---
+## Link
+https://microbialself.github.io/#/
+---
 
 ## Core Concept
 
