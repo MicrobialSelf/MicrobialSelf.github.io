@@ -24,7 +24,7 @@ The platform invites users to explore this idea through two integrated modules:
 
 ### 1. Microbiome & Lifestyle Module
 
-Users can upload a gut microbiome CSV file and complete a lifestyle questionnaire.
+Users can upload a gut microbiome CSV file (two sample csv files provided in the repoistory as "divers.csv" and "low.csv") and complete a lifestyle questionnaire.
 
 The system then:
 
