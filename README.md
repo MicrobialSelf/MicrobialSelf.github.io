@@ -9,9 +9,6 @@ Rather than treating identity as fixed or purely human-centered, this project fr
 This tool is designed for **reflection and learning**, not diagnosis or clinical interpretation.
 
 ---
-## Link
-https://microbialself.github.io/#/
----
 
 ## Core Concept
 
@@ -21,6 +18,8 @@ The platform invites users to explore this idea through two integrated modules:
 - A **microbiome + lifestyle analysis module**
 - A **psychological self-schema reflection module**
 
+---
+## Link: https://microbialself.github.io/#/
 ---
 
 ## Features
